@@ -1,0 +1,44 @@
+ <header class="header" [class.hidden]="isHidden">
+    <div class="header-container">
+        <!-- logo -->
+        <a routerLink="/" class="logo-link">fill your tote!</a>
+        <!-- navigation options -->
+         <nav class="nav">
+            <a routerLink="/drawings" routerLinkActive="active" class="nav-link">Drawings</a>
+            <a routerLink="/shop" routerLinkActive="active" class="nav-link">Shop</a>
+
+            <div class="icon-links">
+                <a routerLink="/favourites"
+                    routerLinkActive="active"
+                    #favouritesActive="routerLinkActive"
+                    class="icon-link"
+                    title="Favourites"
+                    (mouseenter)="favouritesHover = true"
+                    (mouseleave)="favouritesHover = false">
+                    <mat-icon [fontSet]="favouritesActive.isActive || favouritesHover ? 'material-icons' : 'material-icons-outlined'">
+                        {{ favouritesActive.isActive || favouritesHover ? 'favorite' : 'favorite_border' }}
+                    </mat-icon>
+                </a>
+                <a routerLink="/cart"
+                    routerLinkActive="active"
+                    #cartActive="routerLinkActive"
+                    class="icon-link"
+                    title="Shopping Cart"
+                    (mouseenter)="cartHover = true"
+                    (mouseleave)="cartHover = false">
+                    <mat-icon [fontSet]="cartActive.isActive || cartHover ? 'material-icons' : 'material-icons-outlined'">
+                        {{ cartActive.isActive || cartHover ? 'shopping_basket' : 'shopping_basket' }}
+                    </mat-icon>
+                </a>
+                <a routerLink="/account" 
+                    routerLinkActive="active" 
+                    #accountActive="routerLinkActive"
+                    class="login-button"
+                    title="Shopping Cart"
+                    (mouseenter)="accountHover = true"
+                    (mouseleave)="accountHover = false">Join the club
+                </a>
+            </div>
+         </nav>
+    </div>
+</header>

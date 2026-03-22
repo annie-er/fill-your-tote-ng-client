@@ -1,0 +1,13 @@
+<div class="drawings-container">
+  @if (drawings().length === 0) {
+    <p class="loading-text">Loading drawings...</p>
+  } @else {
+    <div class="masonry-layout">
+      @for (drawing of drawings(); track drawing.id) {
+        <a [routerLink]="['/drawings', drawing.slug]" class="drawing-item">
+          <img [src]="drawing.imageUrl" [alt]="drawing.name" class="drawing-image" loading="lazy" />
+        </a>
+      }
+    </div>
+  }
+</div>

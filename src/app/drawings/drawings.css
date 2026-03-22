@@ -1,0 +1,61 @@
+.drawings-container {
+  background-color: #fdfcf8;
+  min-height: 100vh;
+  padding: 12rem 4rem 0rem 4rem;
+}
+
+.masonry-layout {
+  column-count: 3;
+  column-gap: 2rem;
+  column-fill: balance;
+}
+
+.drawing-item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  break-inside: avoid;
+}
+
+.drawing-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.drawing-item:hover .drawing-image {
+  transform: scale(1.02);
+}
+
+.loading-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: #aaa;
+  text-align: center;
+  padding-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .drawings-container {
+    padding: 7rem 2rem 3rem 2rem;
+  }
+
+  .masonry-layout {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawings-container {
+    padding: 6rem 1rem 2rem 1rem;
+  }
+
+  .masonry-layout {
+    column-count: 1;
+  }
+}

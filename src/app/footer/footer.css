@@ -1,0 +1,40 @@
+.footer {
+  background-color: #fdfcf8;
+  padding: 4rem 4rem 2rem 4rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.footer-heading {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #5a3a1a;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.footer-bottom {
+  padding-top: 0rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-credit {
+  font-size: 0.8rem;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 1.5rem 2rem 1.5rem;
+  }
+
+  .footer-heading {
+    font-size: 2rem;
+  }
+
+  .footer-bottom {
+    justify-content: flex-start;
+  }
+}

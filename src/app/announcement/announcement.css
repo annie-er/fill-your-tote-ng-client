@@ -1,0 +1,11 @@
+
+.announcement-banner {
+  width: 100%;
+  background-color: #f9e4e4;
+  text-align: center;
+  padding: 6px 0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  height: 1.5rem;
+}

@@ -1,0 +1,101 @@
+.header {
+  position: fixed;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  font-family: 'Nunito', sans-serif;
+  padding: 2rem 4rem 2rem 4rem;
+  transition: transform 0.3s ease;
+}
+
+header.hidden {
+  transform: translateY(-150%);
+}
+
+.header-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  border-radius: 10px; 
+  /* background-color: #f4efe2; */
+  background-color: #fdfcf8;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  font-family: 'Gaegu', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  color: #111;
+  transition: opacity 0.2s ease;
+} 
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.icon-links {
+  display: flex;
+  gap: 2rem;
+  margin-left: 1rem;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.icon-link:hover {
+  transform: scale(1.05);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  font-weight: 700;
+  transform: scale(1.05);
+}
+
+.login-button {
+  padding: 6px 24px;
+  font-size: 1rem; 
+  font-weight: 600; 
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+  background-color: #fff;
+  color: #333 !important;
+  border: 1px solid #333;
+  border-radius: 15px;
+  background-color: #c1dbe8;
+}
+
+.login-button:hover,
+.login-button.active {
+    font-weight: 700;
+    transform: scale(1.05);
+}

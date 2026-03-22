@@ -1,0 +1,212 @@
+<div class="home-container">
+  <!-- Hero section -->
+  <div class="hero-section">
+    <img
+      src="/home-welcome-bg.png"
+      alt="Hero image"
+      class="background-image"
+    />
+  </div>
+  
+  <!-- Strip between hero and welcome -->
+  <div class="strip-banner">
+    Fill your tote! offers sustainable & artsy tote bags, designed just for you
+  </div>
+
+  <!-- Who we are/mission Section -->
+  <div class="welcome-section">
+    <div class="welcome-cards">
+      <div class="welcome-card">
+        <h2 class="welcome-card-title">Who We Are</h2>
+        <hr class="welcome-card-divider" />
+        <p class="welcome-card-text">
+          Fill Your Tote! is a one-woman shop run by Annie, a Computer Science student at the University of Toronto. 
+          What started as a passion project became a small business in June 2023 through Summer Company. 
+          Annie enjoys creating visual stories on tote bags for people to wear. 
+          Her drawings revolve around friendship, human emotion, and love.
+        </p>
+      </div>
+
+      <div class="welcome-card">
+        <h2 class="welcome-card-title">Our Mission</h2>
+        <hr class="welcome-card-divider" />
+        <p class="welcome-card-text">
+          Our mission is simple: to connect our community with thoughtfully
+          crafted, eco-friendly tote bags while fostering meaningful
+          relationships between clients and creators.
+          Fill Your Tote! strives to offer compelling, artsy tote bags that resonate with the people who carry them (no more boring totes).        
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process section -->
+  <div class="process-section">
+    <div class="process-header">
+      <h2 class="process-title">How Things Work</h2>
+    </div>
+
+    <div class="process-cards">
+      <div class="process-card">
+        <img src="/process-step-one.png" alt="Step 1" class="process-card-image" />
+        <h3 class="process-card-title">Step 1. Discuss</h3>
+        <p class="process-card-text">
+          Tell us your vision and we'll bring it to life though a compelling design on an eco-friendly canvas tote. 
+        </p>
+      </div>
+
+      <div class="process-card">
+        <img src="/process-step-two.png" alt="Step 2" class="process-card-image" />
+        <h3 class="process-card-title">Step 2. Design</h3>
+        <p class="process-card-text">
+          After providing a few sample designs, you pick a final design that we handcraft onto your totes. 
+        </p>
+      </div>
+
+      <div class="process-card">
+        <img src="/process-step-three.png" alt="Step 3" class="process-card-image" />
+        <h3 class="process-card-title">Step 3. Deliver</h3>
+        <p class="process-card-text">
+          Your one-of-a-kind tote is carefully packaged and delivered to your door. You can finally start wearing them!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq-section">
+    <div class="faq-container">
+      <h3 class="faq-title">Questions &amp; Answers</h3>
+      <div class="faq-list">
+        @for (faq of faqData; track faq.id) {
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              [class.expanded]="isExpanded(faq.id)"
+              (click)="toggleQuestion(faq.id)"
+              [attr.aria-expanded]="isExpanded(faq.id)"
+            >
+              <span>{{ faq.question }}</span>
+              <span class="faq-icon">{{ isExpanded(faq.id) ? '−' : '+' }}</span>
+            </button>
+            <div
+              class="faq-answer"
+              [class.expanded]="isExpanded(faq.id)"
+            >
+              <div>
+                <p>{{ faq.answer }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact section -->
+  <div class="contact-section">
+    <img src="/home-background-stripes.png" alt="Contact background" class="contact-bg" />
+
+    <div class="contact-card">
+      <h2 class="contact-title">Get In Touch!</h2>
+
+      <!-- Success message -->
+      @if (submitStatus === 'success') {
+        <div class="contact-success">
+          <p>Thank you! I'll be in touch soon.</p>
+        </div>
+      }
+
+      <!-- Error message -->
+      @if (submitStatus === 'error') {
+        <div class="contact-error">
+          <p>Something went wrong. Please try again!</p>
+        </div>
+      }
+
+      <!-- Form -->
+      @if (submitStatus !== 'success') {
+        <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" >
+
+          <div class="contact-row">
+            <div class="contact-field">
+              <label class="contact-label" for="fullName">Full Name</label>
+              <input class="contact-input" id="fullName" name="fullName"
+                type="text" 
+                ngModel
+                required
+                [disabled]="isSubmitting" />
+            </div>
+            <div class="contact-field">
+              <label class="contact-label" for="pronouns">Pronouns</label>
+              <input class="contact-input" id="pronouns" name="pronouns"
+                type="text"
+                ngModel
+                [disabled]="isSubmitting" />
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-field">
+              <label class="contact-label" for="email">Email address</label>
+              <input class="contact-input" id="email" name="email"
+                type="email" 
+                required
+                email
+                ngModel
+                [disabled]="isSubmitting" 
+                #emailInput="ngModel"/>
+            </div>
+            <div class="contact-field">
+              <label class="contact-label" for="company">Company <span class="contact-helper">if applicable</span></label>
+              <input class="contact-input" id="company" name="company"
+                type="text"
+                ngModel
+                [disabled]="isSubmitting" />
+            </div>
+          </div>
+
+          <div class="contact-field">
+            <label class="contact-label" for="website">Website / social media handle</label>
+            <input class="contact-input" id="website" name="websiteOrProfile"
+              type="text"
+              ngModel
+              [disabled]="isSubmitting" />
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-field">
+              <label class="contact-label" for="budget">Budget</label>
+              <input class="contact-input" id="budget" name="budget"
+                type="text" placeholder="e.g. $200–$350"
+                ngModel
+                [disabled]="isSubmitting" />
+            </div>
+            <div class="contact-field">
+              <label class="contact-label" for="dueDate">Approx. due date</label>
+              <input class="contact-input" id="dueDate" name="dueDate"
+                type="date"
+                ngModel
+                [disabled]="isSubmitting" />
+            </div>
+          </div>
+
+          <div class="contact-field">
+            <label class="contact-label" for="message">I'd like to chat about</label>
+            <textarea class="contact-input contact-textarea" id="message" name="message"
+              rows="4"
+              required
+              ngModel
+              [disabled]="isSubmitting"></textarea>
+          </div>
+
+          <div class="contact-submit">
+            <button class="contact-button" type="submit" [disabled]="isSubmitting || contactForm.invalid">
+              {{ isSubmitting ? 'Sending...' : 'Send it!' }}
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

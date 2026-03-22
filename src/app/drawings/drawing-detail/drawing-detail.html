@@ -1,0 +1,46 @@
+@if (!drawing()) {
+  <div class="drawing-detail-overlay">
+    <p>Drawing not found.</p>
+    <button class="close-btn" (click)="goBack()">&#10005;</button>
+  </div>
+} @else {
+  <div class="drawing-detail-overlay">
+
+    <!-- Close button -->
+    <button class="close-btn" (click)="goBack()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Three column layout -->
+    <div class="detail-layout">
+
+      <!-- Left arrow column -->
+      <div class="nav-col">
+        @if (hasPrevious) {
+          <button class="nav-btn" (click)="navigate('prev')">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        }
+      </div>
+
+      <!-- Image + info column -->
+      <div class="detail-content">
+        <img [src]="drawing()!.imageUrl" [alt]="drawing()!.name" class="detail-image" />
+        <div class="detail-info">
+          <h2 class="detail-title">{{ drawing()!.name }}</h2>
+          <p class="detail-description">{{ drawing()!.description }}</p>
+        </div>
+      </div>
+
+      <!-- Right arrow column -->
+      <div class="nav-col">
+        @if (hasNext) {
+          <button class="nav-btn" (click)="navigate('next')">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        }
+      </div>
+
+    </div>
+  </div>
+}

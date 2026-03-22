@@ -1,0 +1,456 @@
+.home-container {
+  position: relative;
+}
+
+/* hero */
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+}
+
+/* banner */
+.strip-banner {
+  background-color: #f4ebe9;
+  color: #333;
+  text-align: center;
+  padding: 0.75rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* welcome */
+.welcome-section {
+  background-color: #cbb6a2;
+  padding: 4rem 6rem;
+}
+
+.welcome-cards {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.welcome-card {
+  background-color: #f4efe2;
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+.welcome-card-title {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #5a3a1a;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.welcome-card-divider {
+  border: none;
+  border-top: 1px solid #c8b89a;
+  margin-bottom: 1.5rem;
+}
+
+.welcome-card-text {
+  line-height: 1.6;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+/* process */
+.process-section {
+  background-color: #e3e0cf;
+  padding: 4rem 6rem;
+}
+
+.process-title {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #5a3a1a;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.process-cards {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.process-card {
+  background-color: #f4ebe9;
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.process-card-image {
+  width: 100%;
+  max-width: 12rem;
+  height: 10rem;
+  object-fit: contain;
+  object-position: center;
+  margin-bottom: 1rem;
+}
+
+.process-card-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.process-card-text {
+  line-height: 1.6;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+/* faq */
+.faq-section {
+  padding: 4rem 6rem;
+  background-color: #f4efe2;
+}
+
+.faq-container {
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #5a3a1a;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 4rem;
+}
+
+.faq-item {
+  background: #f6f6f2;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.expanded .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  padding: 0 1.5rem;
+}
+
+.faq-answer.expanded {
+  grid-template-rows: 1fr;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.faq-answer > div {
+  min-height: 0;
+}
+
+.faq-answer p {
+  margin: 0;
+  line-height: 1.6;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+.faq-spacer {
+  background-color: #f4efe2;
+  height: 4rem;
+}
+
+/* contact */
+.contact-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.contact-card {
+  position: relative;
+  z-index: 1;
+  background-color: #f4efe2;
+  border-radius: 4px;
+  padding: 4rem 4rem; /* increase padding */
+  width: 100%;
+  max-width: 38rem; /* increase max-width */
+}
+
+.contact-title {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #5a3a1a;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+.contact-input-line {
+  width: 100%;
+  height: 1px;
+  background-color: #a0856a;
+  margin-top: 0.75rem;
+}
+
+.contact-submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.contact-button {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.contact-helper {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-left: 0.5rem;
+  font-style: italic;
+}
+
+.contact-input {
+  width: 100%;
+  background: #f4efe2;
+  border: 1px solid #c8b89a;
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.contact-input:focus {
+  border-color: #5a3a1a;
+}
+
+.contact-textarea {
+  resize: none;
+  border: 1px solid #c8b89a;
+  border-radius: 6px;
+}
+
+.contact-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  height: auto;
+  line-height: normal;
+}
+
+.contact-success {
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: #333;
+  padding: 2rem 0;
+}
+
+.contact-error {
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: #c0392b;
+  margin-bottom: 1rem;
+}
+
+.contact-input.ng-invalid.ng-touched.ng-dirty {
+  background-color: #fbdcd6;
+  border-color: #f84e2c;
+}
+
+.contact-field:has(.ng-invalid.ng-touched.ng-dirty) .contact-label {
+  color: #f84e2c;
+}
+
+/* ── media queries ── */
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 2rem 1rem;
+  }
+
+  .welcome-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .process-section {
+    padding: 2rem 1rem;
+  }
+
+  .process-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-section {
+    padding: 2rem 1rem;
+  }
+
+  .faq-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-question {
+    padding: 1.25rem;
+  }
+
+  .faq-answer.expanded {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+
+  .contact-row {
+    grid-template-columns: 1fr; /* stack on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .process-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .process-title {
+    font-size: 1.5rem;
+  }
+
+  .faq-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .contact-card {
+    margin: 2rem 1rem;
+    padding: 2rem;
+  }
+}
