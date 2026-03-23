@@ -1,1 +1,37 @@
-<p>shop works!</p>
+<div class="shop-container">
+  @if (products().length === 0) {
+    <p class="loading-text">Loading...</p>
+  } @else {
+    <div class="products-grid">
+      @for (product of products(); track product.id) {
+        <a [routerLink]="['/shop', product.slug]" class="product-item">
+          <div class="product-image-wrapper">
+            <img [src]="product.imageUrl" [alt]="product.name" class="product-image" loading="lazy" />
+            <button class="icon-btn heart-btn" (click)="$event.preventDefault()">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-text">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-price">${{ product.price }}</p>
+              <p class="product-description">{{ product.description }}</p>
+            </div>
+            <button class="icon-btn cart-btn" (click)="addToCart($event, product)">
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </div>
+        </a>
+      }
+    </div>
+  }
+
+  @if (showNotification) {
+    <app-cart-notification
+      [productName]="notificationProduct"
+      [quantity]="notificationQuantity"
+      (close)="showNotification = false"
+      (viewCart)="goToCart()"
+    />
+  }
+</div>

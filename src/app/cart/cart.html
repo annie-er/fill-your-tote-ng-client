@@ -1,1 +1,82 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <div class="cart-layout">
+
+    <!-- left: items -->
+    <div class="cart-items">
+      <div class="cart-table-header">
+        <span>Product</span>
+        <span class="col-center">Quantity</span>
+        <span class="col-center">Total</span>
+        <span class="col-center">Delete</span>
+      </div>
+
+      @if (cartItems().length === 0) {
+        <div class="cart-empty">
+          <p>Your cart is empty.</p>
+          <button class="btn-shop" (click)="goToShop()">Go to shop</button>
+        </div>
+      } @else {
+        @for (item of cartItems(); track item.id) {
+          <div class="cart-item">
+            <div class="cart-item-product">
+              <div class="cart-item-image-wrapper">
+                <img [src]="item.image" [alt]="item.name" class="cart-item-image" />
+              </div>
+              <div class="cart-item-info">
+                <h3 class="cart-item-name">{{ item.name }}</h3>
+                <p class="cart-item-description">{{ item.description }}</p>
+              </div>
+            </div>
+
+            <div class="cart-item-quantity col-center">
+              <button class="icon-btn quantity-btn" (click)="increment(item.id, item.quantity)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <span class="quantity-value">{{ item.quantity }}</span>
+              <button class="icon-btn quantity-btn" (click)="decrement(item.id, item.quantity)" [disabled]="item.quantity <= 1">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+
+            <span class="cart-item-total col-center">${{ item.price * item.quantity }}</span>
+
+            <div class="col-center">
+              <button class="icon-btn delete-btn" (click)="removeItem(item.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- right: order summary -->
+    <div class="order-summary">
+      <h2 class="summary-title">Order Summary</h2>
+
+      <div class="summary-rows">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>${{ cartSummary().subtotal }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (13%)</span>
+          <span>${{ cartSummary().vatAmount }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span>Free</span>
+        </div>
+        <hr class="summary-divider" />
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span>${{ cartSummary().total }}</span>
+        </div>
+      </div>
+
+      <p class="summary-guarantee">Quality guarantee on all items in our store.</p>
+      <button class="btn-checkout" [disabled]="cartItems().length === 0">Checkout</button>
+    </div>
+
+  </div>
+</div>

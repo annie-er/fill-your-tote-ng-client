@@ -1,0 +1,83 @@
+.cart-notification {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  background-color: #fdfcf8;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 16rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.close-btn mat-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.cart-notification-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cart-notification-item {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.cart-notification-qty {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0;
+}
+
+.view-cart-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #fdfcf8;
+  background-color: #333;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.view-cart-btn:hover {
+  opacity: 0.8;
+}

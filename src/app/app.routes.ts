@@ -6,6 +6,7 @@ import { Shop } from './shop/shop';
 import { Favourites } from './favourites/favourites';
 import { Cart } from './cart/cart';
 import { Account } from './account/account';
+import { ProductDetail } from './shop/product-detail/product-detail';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,10 @@ export const routes: Routes = [
         path: 'shop',
         component: Shop
     }, 
+    {
+        path: 'shop/:identifier',
+        component: ProductDetail
+    },
     {
         path: 'favourites',
         component: Favourites

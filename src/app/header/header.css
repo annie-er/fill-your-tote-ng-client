@@ -5,7 +5,7 @@
   right: 0;
   z-index: 100;
   font-family: 'Nunito', sans-serif;
-  padding: 2rem 4rem 2rem 4rem;
+  padding: 2rem 6rem 2rem 6rem;
   transition: transform 0.3s ease;
 }
 
@@ -21,7 +21,7 @@ header.hidden {
   justify-content: space-between;
   align-items: center;
   border: 1px solid #333;
-  border-radius: 10px; 
+  border-radius: 12px; 
   /* background-color: #f4efe2; */
   background-color: #fdfcf8;
 }
@@ -80,8 +80,7 @@ header.hidden {
 .login-button {
   padding: 6px 24px;
   font-size: 1rem; 
-  font-weight: 600; 
-  border-radius: 25px;
+  font-weight: 600;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;

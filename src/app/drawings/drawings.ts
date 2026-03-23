@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Drawing } from '../models/drawing.model';
-import { DrawingsService } from './drawings.service';
+import { DrawingsService } from '../services/drawings.service';
 
 @Component({
   selector: 'app-drawings',

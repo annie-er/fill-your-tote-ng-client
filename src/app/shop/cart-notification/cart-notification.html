@@ -1,0 +1,9 @@
+<div class="cart-notification">
+  <button class="close-btn" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h4 class="cart-notification-title">Added to your cart</h4>
+  <p class="cart-notification-item">{{ productName() }}</p>
+  <p class="cart-notification-qty">Qty: {{ quantity() }}</p>
+  <button class="view-cart-btn" (click)="onViewCart()">View Cart</button>
+</div>

@@ -1,1 +1,99 @@
-<p>product-detail works!</p>
+<div class="product-detail-overlay">
+
+  <button class="close-btn" (click)="goBack()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  @if (product()) {
+    <div class="product-layout-wrapper">
+
+      <!-- Left arrow -->
+      <div class="nav-col">
+        @if (hasPrevious) {
+          <button class="nav-btn" (click)="navigate('prev')">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        }
+      </div>
+
+      <!-- Main content -->
+      <div class="product-detail-container">
+
+        <!-- left column -->
+        <div class="product-left">
+          <div class="product-main-image-wrapper">
+            <img [src]="product()?.imageUrl" [alt]="product()?.name" class="product-main-image" />
+          </div>
+        </div>
+
+        <!-- right column -->
+        <div class="product-right">
+          <div class="product-header">
+            <h1 class="product-name">{{ product()?.name }}</h1>
+            <span class="product-price">${{ product()?.price }}</span>
+          </div>
+
+          <div class="product-section">
+            <h2 class="product-section-title">Description</h2>
+            <p class="product-description">{{ product()?.description }}</p>
+          </div>
+
+          <div class="product-section">
+            <h2 class="product-section-title">Features</h2>
+            <ul class="product-features">
+              <li><span class="feature-label">Material:</span> Heavy duty 12oz, 70% natural cotton/30% polyester</li>
+              <li><span class="feature-label">Dimensions:</span> 40 x 35 x 10 cm</li>
+              <li><span class="feature-label">Weight:</span> 2.38 kg</li>
+            </ul>
+          </div>
+
+          <!-- accordion -->
+          <div class="accordion-item">
+            <button class="accordion-btn" [class.expanded]="careOpen" (click)="careOpen = !careOpen">
+              <span>Product care instructions</span>
+              <mat-icon>{{ careOpen ? 'remove' : 'add' }}</mat-icon>
+            </button>
+            <div class="accordion-body" [class.expanded]="careOpen">
+              <div>
+                <p>Hand washing is recommended as machine wash will degrade the design over time.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- actions -->
+          <div class="product-actions">
+            <div class="quantity-controls">
+              <button class="quantity-btn" (click)="decrement()" [disabled]="quantity <= 1">−</button>
+              <span class="quantity-value">{{ quantity }}</span>
+              <button class="quantity-btn" (click)="increment()">+</button>
+            </div>
+            <button class="btn-cart" (click)="addToCart()">ADD TO CART</button>
+            <button class="btn-favourites">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right arrow -->
+      <div class="nav-col">
+        @if (hasNext) {
+          <button class="nav-btn" (click)="navigate('next')">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        }
+      </div>
+
+    </div>
+  }
+
+  @if (showNotification) {
+    <app-cart-notification
+      [productName]="product()?.name ?? ''"
+      [quantity]="quantity"
+      (close)="showNotification = false"
+      (viewCart)="goToCart()"
+    />
+  }
+</div>

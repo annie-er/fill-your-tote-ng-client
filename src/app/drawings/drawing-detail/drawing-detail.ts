@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { DrawingsService } from '../drawings.service';
+import { DrawingsService } from '../../services/drawings.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
