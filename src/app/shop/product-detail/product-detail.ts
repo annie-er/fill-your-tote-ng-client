@@ -2,13 +2,17 @@ import { Component, computed, DestroyRef, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShopService } from '../../services/shop.service';
 import { CartService } from '../../services/cart.service';
+import { FavouritesService } from '../../services/favourites.service';
+import { AuthService } from '../../core/services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CartNotification } from '../cart-notification/cart-notification';
+import { FavouriteNotification } from '../favourite-notification/favourite-notification';
+import { AuthNotification } from '../../shared/auth-notification/auth-notification';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [MatIconModule, CartNotification],
+  imports: [MatIconModule, CartNotification, FavouriteNotification, AuthNotification],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
@@ -16,12 +20,17 @@ export class ProductDetail {
   identifier = input.required<string>();
   private shopService = inject(ShopService);
   private cartService = inject(CartService);
+  private favouritesService = inject(FavouritesService);
+  private authService = inject(AuthService);
+  
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   allProducts = this.shopService.getProductsSignal();
 
-  showNotification = false;
+  showCartNotification = false;
+  showFavouriteNotification = false;
+  showAuthNotification = false; 
 
   product = computed(() =>
     this.allProducts().find(p => p.slug === this.identifier() || String(p.id) === this.identifier())
@@ -50,12 +59,12 @@ export class ProductDetail {
     const product = this.product();
     if (product) {
       // show notification immediately, don't wait for HTTP
-      this.showNotification = true;
-      setTimeout(() => this.showNotification = false, 4000);
+      this.showCartNotification = true;
+      setTimeout(() => this.showCartNotification = false, 4000);
 
       const subscription = this.cartService.addToCart(product.id, this.quantity).subscribe({
         error: (error: Error) => {
-          this.showNotification = false; // hide if request fails
+          this.showCartNotification = false; // hide if request fails
           console.error(error.message);
         }
       });
@@ -64,8 +73,43 @@ export class ProductDetail {
     }
   }
 
+  addToFavourites() {
+    const product = this.product();
+    if (!product) return;
+
+    // ← check auth first
+    if (!this.authService.isAuthenticated()) {
+      this.showAuthNotification = true;
+      setTimeout(() => this.showAuthNotification = false, 4000);
+      return;
+    }
+
+    this.showFavouriteNotification = true;
+    setTimeout(() => this.showFavouriteNotification = false, 4000);
+
+    const subscription = this.favouritesService.addToFavourites(product.id).subscribe({
+      error: (error: Error) => {
+        this.showFavouriteNotification = false;
+        console.error(error.message);
+      }
+    });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+  
+  goToFavourites() {
+    this.router.navigate(['/favourites']);
+  }
+
   goToCart() {
     this.router.navigate(['/cart']);
   }
-  goBack() { this.router.navigate(['/shop']); }
+
+  goBack() { 
+    this.router.navigate(['/shop']); 
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }

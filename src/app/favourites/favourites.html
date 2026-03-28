@@ -1,1 +1,63 @@
-<p>favourites works!</p>
+<div class="favourites-container">
+
+  @if (!isAuthenticated()) {
+    <div class="favourites-empty">
+      <p class="auth-message">You must be logged in to view your favourites.</p>
+      <button class="view-auth-btn" (click)="onViewAuth()">Sign in</button>
+    </div>
+  } @else {
+
+    <div class="favourites-table-header">
+      <span>Product</span>
+      <span class="col-center">Price</span>
+      <span class="col-center">Add to Cart</span>
+      <span class="col-center">Remove</span>
+    </div>
+
+    @if (favouriteItems().length === 0) {
+      <div class="favourites-empty">
+        <p>No favourites yet.</p>
+        <button class="btn-shop" (click)="goToShop()">Go to Shop</button>
+      </div>
+    } @else {
+      @for (item of favouriteItems(); track item.id) {
+        <div class="favourite-item">
+          <div class="favourite-item-product">
+            <div class="favourite-item-image-wrapper">
+              <img [src]="item.image" [alt]="item.name" class="favourite-item-image" />
+            </div>
+            <div class="favourite-item-info">
+              <h3 class="favourite-item-name">{{ item.name }}</h3>
+              <p class="favourite-item-description">{{ item.description }}</p>
+            </div>
+          </div>
+
+          <span class="favourite-item-price col-center">${{ item.price }}</span>
+
+          <div class="col-center">
+            <button class="icon-btn cart-btn" (click)="addToCart(item)">
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </div>
+
+          <div class="col-center">
+            <button class="icon-btn delete-btn" (click)="removeItem(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    }
+
+    @if (showNotification) {
+      <app-cart-notification
+        [productName]="notificationProduct"
+        [quantity]="1"
+        (close)="showNotification = false"
+        (viewCart)="goToCart()"
+      />
+    }
+
+  }
+
+</div>

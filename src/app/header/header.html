@@ -30,15 +30,40 @@
                         {{ cartActive.isActive || cartHover ? 'shopping_basket' : 'shopping_basket' }}
                     </mat-icon>
                 </a>
-                <a routerLink="/account" 
-                    routerLinkActive="active" 
-                    #accountActive="routerLinkActive"
-                    class="login-button"
-                    title="Shopping Cart"
-                    (mouseenter)="accountHover = true"
-                    (mouseleave)="accountHover = false">Join the club
-                </a>
+                <button class="icon-link account-btn"
+                        title="Account"
+                        (click)="toggleAccountPanel()">
+                    <mat-icon>face</mat-icon>
+                </button>
+                <button class="login-button"
+                        (mouseenter)="accountHover = true"
+                        (mouseleave)="accountHover = false"
+                        (click)="scrollToContact()">
+                Join the club
+                </button>
             </div>
          </nav>
     </div>
 </header>
+
+<!-- Overlay backdrop -->
+@if (showAccountPanel) {
+  <div class="panel-backdrop" (click)="closeAccountPanel()"></div>
+}
+
+<!-- Slide-in panel -->
+<div class="account-panel" [class.open]="showAccountPanel">
+  <button class="panel-close-btn" (click)="closeAccountPanel()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  @if (!isAuthenticated()) {
+    <p class="panel-title">Welcome</p>
+    <div class="panel-actions">
+      <button class="panel-btn primary" (click)="goTo('/login')">Sign In</button>
+      <button class="panel-btn secondary" (click)="goTo('/register')">Create Account</button>
+    </div>
+  } @else {
+    <p class="panel-title">Hello, {{ currentUser()?.firstName }}!</p>
+  }
+</div>

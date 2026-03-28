@@ -1,0 +1,211 @@
+.favourites-container {
+  background-color: #fdfcf8;
+  min-height: 100vh;
+  padding: 12rem 6rem 0rem 6rem;
+}
+
+/* table header */
+.favourites-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 0.75rem 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #333;
+  background-color: white;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* centering helper */
+.col-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* favourite item */
+.favourite-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: center;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.favourite-item-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.favourite-item-image-wrapper {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #f4ebe9;
+  flex-shrink: 0;
+}
+
+.favourite-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.favourite-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.favourite-item-name {
+  font-family: 'Gamja Flower', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #333;
+  margin: 0;
+}
+
+.favourite-item-description {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #888;
+  margin: 0;
+}
+
+.favourite-item-price {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* icon buttons */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.02);
+}
+
+.icon-btn mat-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.cart-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: transparent;
+  border: 1.5px solid #333;
+}
+
+.cart-btn mat-icon {
+  color: #333;
+}
+
+.delete-btn {
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: 1px solid #888;
+  color: #888;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.delete-btn mat-icon {
+  color: #888;
+}
+
+.delete-btn:hover {
+  transform: scale(1.02);
+}
+
+/* empty state */
+.favourites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem 0;
+  font-family: 'Nunito', sans-serif;
+  color: #aaa;
+}
+
+.btn-shop {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #333;
+  background-color: #f0ead8;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-shop:hover {
+  transform: scale(1.02);
+}
+
+.view-auth-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #333;
+  background-color: #f0ead8;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.view-auth-btn:hover {
+  transform: scale(1.02);
+}
+
+.auth-message {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ── media queries ── */
+@media (max-width: 48rem) {
+  .favourites-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .favourites-table-header {
+    display: none;
+  }
+
+  .favourite-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .favourites-container {
+    padding: 1.5rem 1rem;
+  }
+}

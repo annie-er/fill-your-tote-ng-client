@@ -1,4 +1,4 @@
-.cart-notification {
+.favourite-notification {
   position: fixed;
   top: 2rem;
   right: 2rem;
@@ -39,7 +39,7 @@
   height: 1rem;
 }
 
-.cart-notification-title {
+.favourite-notification-title {
   font-family: 'Nunito', sans-serif;
   font-size: 0.85rem;
   font-weight: 800;
@@ -49,21 +49,15 @@
   text-transform: uppercase;
 }
 
-.cart-notification-item {
+.favourite-notification-item {
   font-family: 'Gamja Flower', sans-serif;
   font-size: 1.1rem;
   color: #333;
   margin: 0;
 }
 
-.cart-notification-qty {
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.85rem;
-  color: #888;
-  margin: 0;
-}
 
-.view-cart-btn {
+.view-favourites-btn {
   font-family: 'Nunito', sans-serif;
   font-size: 0.8rem;
   font-weight: 800;
@@ -78,6 +72,6 @@
   margin-top: 0.5rem;
 }
 
-/* .view-cart-btn:hover {
-  opacity: 0.8;
+/* .view-favourites-btn:hover {
+  transform: scale(1.02);
 } */

@@ -79,11 +79,11 @@ header.hidden {
 
 .login-button {
   padding: 6px 24px;
-  font-size: 1rem; 
-  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 500; 
+  font-size: 1rem; 
   transition: all 0.2s ease;
   display: inline-block;
   background-color: #fff;
@@ -96,5 +96,103 @@ header.hidden {
 .login-button:hover,
 .login-button.active {
     font-weight: 700;
-    transform: scale(1.05);
+    transform: scale(1.02);
+}
+
+.account-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+/* Backdrop */
+.panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 200;
+}
+
+/* Slide-in panel */
+.account-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 300px;
+  background: #fdfcf8;
+  z-index: 201;
+  padding: 48px 32px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.panel-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.panel-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  &.primary {
+    background: #333;
+    color: #fff;
+  }
+
+  &.secondary {
+    background: transparent;
+    border: 1px solid #333;
+    color: #333;
+  }
 }

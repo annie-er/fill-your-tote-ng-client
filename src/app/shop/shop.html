@@ -7,7 +7,7 @@
         <a [routerLink]="['/shop', product.slug]" class="product-item">
           <div class="product-image-wrapper">
             <img [src]="product.imageUrl" [alt]="product.name" class="product-image" loading="lazy" />
-            <button class="icon-btn heart-btn" (click)="$event.preventDefault()">
+            <button class="icon-btn heart-btn" (click)="addToFavourites($event, product)">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>
@@ -26,12 +26,27 @@
     </div>
   }
 
-  @if (showNotification) {
+  @if (showCartNotification) {
     <app-cart-notification
       [productName]="notificationProduct"
       [quantity]="notificationQuantity"
-      (close)="showNotification = false"
+      (close)="showCartNotification = false"
       (viewCart)="goToCart()"
+    />
+  }
+
+  @if (showFavouriteNotification) {
+    <app-favourite-notification
+      [productName]="notificationProduct"
+      (close)="showFavouriteNotification = false"
+      (viewFavourites)="goToFavourites()"
+    />
+  }
+
+  @if (showAuthNotification) {
+    <app-auth-notification
+      (close)="showAuthNotification = false"
+      (viewAuth)="goToLogin()"
     />
   }
 </div>

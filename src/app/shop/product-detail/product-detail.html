@@ -68,7 +68,7 @@
               <button class="quantity-btn" (click)="increment()">+</button>
             </div>
             <button class="btn-cart" (click)="addToCart()">ADD TO CART</button>
-            <button class="btn-favourites">
+            <button class="btn-favourites" (click)="addToFavourites()">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>
@@ -88,12 +88,27 @@
     </div>
   }
 
-  @if (showNotification) {
+  @if (showCartNotification) {
     <app-cart-notification
       [productName]="product()?.name ?? ''"
       [quantity]="quantity"
-      (close)="showNotification = false"
+      (close)="showCartNotification = false"
       (viewCart)="goToCart()"
+    />
+  }
+
+  @if (showFavouriteNotification) {
+    <app-favourite-notification
+      [productName]="product()?.name ?? ''"
+      (close)="showFavouriteNotification = false"
+      (viewFavourites)="goToFavourites()"
+    />
+  }
+
+  @if (showAuthNotification) {
+    <app-auth-notification
+      (close)="showAuthNotification = false"
+      (viewAuth)="goToLogin()"
     />
   }
 </div>

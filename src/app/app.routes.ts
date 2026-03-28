@@ -1,14 +1,12 @@
 import { Routes } from '@angular/router';
 import { Home } from './home/home';
 import { Drawings } from './drawings/drawings';
-import { DrawingDetail } from './drawings/drawing-detail/drawing-detail';
 import { Shop } from './shop/shop';
-import { Favourites } from './favourites/favourites';
 import { Cart } from './cart/cart';
-import { Account } from './account/account';
-import { ProductDetail } from './shop/product-detail/product-detail';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+    // eagerly loaded routes
     {
         path: '', // <your-domain>/
         component: Home
@@ -17,28 +15,43 @@ export const routes: Routes = [
         path: 'drawings', // <your-domain>/drawings
         component: Drawings,
     },
-    { 
-        path: 'drawings/:identifier', 
-        component: DrawingDetail 
-    },
     {
         path: 'shop',
         component: Shop
     }, 
     {
-        path: 'shop/:identifier',
-        component: ProductDetail
-    },
-    {
-        path: 'favourites',
-        component: Favourites
-    },
-    {
         path: 'cart',
         component: Cart
     },
     {
-        path: 'account',
-        component: Account
-    }
+        path: 'login',
+        loadComponent: () => import('./auth/login/login')
+            .then(m => m.Login)
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./auth/register/register')
+            .then(m => m.Register)
+    },
+    {
+        path: 'favourites',
+        loadComponent: () => import('./favourites/favourites')
+            .then(m => m.Favourites)
+        // canActivate: [authGuard]
+    },
+    {
+        path: 'cart',
+        loadComponent: () => import('./cart/cart')
+            .then(m => m.Cart)
+    },
+    {
+        path: 'drawings/:identifier',
+        loadComponent: () => import('./drawings/drawing-detail/drawing-detail')
+            .then(m => m.DrawingDetail)
+    },
+    {
+        path: 'shop/:identifier',
+        loadComponent: () => import('./shop/product-detail/product-detail')
+            .then(m => m.ProductDetail)
+    },
 ];
