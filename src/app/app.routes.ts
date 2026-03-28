@@ -4,6 +4,7 @@ import { Drawings } from './drawings/drawings';
 import { Shop } from './shop/shop';
 import { Cart } from './cart/cart';
 import { authGuard } from './core/guards/auth.guard';
+import { noAuthGuard } from './core/guards/no-auth.guard';
 
 export const routes: Routes = [
     // eagerly loaded routes
@@ -25,13 +26,13 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        loadComponent: () => import('./auth/login/login')
-            .then(m => m.Login)
+        loadComponent: () => import('./auth/login/login').then(m => m.Login),
+        canActivate: [noAuthGuard]
     },
     {
         path: 'register',
-        loadComponent: () => import('./auth/register/register')
-            .then(m => m.Register)
+        loadComponent: () => import('./auth/register/register').then(m => m.Register),
+        canActivate: [noAuthGuard]
     },
     {
         path: 'favourites',
