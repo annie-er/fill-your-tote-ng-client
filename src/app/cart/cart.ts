@@ -55,4 +55,8 @@ export class Cart implements OnInit {
   goToShop() {
     this.router.navigate(['/shop']);
   }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
 }

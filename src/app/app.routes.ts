@@ -5,6 +5,7 @@ import { Shop } from './shop/shop';
 import { Cart } from './cart/cart';
 import { authGuard } from './core/guards/auth.guard';
 import { noAuthGuard } from './core/guards/no-auth.guard';
+import { Checkout } from './checkout/checkout';
 
 export const routes: Routes = [
     // eagerly loaded routes
@@ -55,4 +56,12 @@ export const routes: Routes = [
         loadComponent: () => import('./shop/product-detail/product-detail')
             .then(m => m.ProductDetail)
     },
+    { 
+        path: 'checkout', 
+        component: Checkout 
+    },
+    // { 
+    //     path: 'checkout/success', 
+    //     component: CheckoutSuccess 
+    // },
 ];

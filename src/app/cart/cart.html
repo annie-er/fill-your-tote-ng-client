@@ -75,7 +75,11 @@
       </div>
 
       <p class="summary-guarantee">Quality guarantee on all items in our store.</p>
-      <button class="btn-checkout" [disabled]="cartItems().length === 0">Checkout</button>
+       <button class="btn-checkout" 
+          [disabled]="cartItems().length === 0"
+          (click)="goToCheckout()">
+          Checkout
+        </button>
     </div>
 
   </div>

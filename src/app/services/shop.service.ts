@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { Product } from '../models/product.model';
 
 @Injectable({

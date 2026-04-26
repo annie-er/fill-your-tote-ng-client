@@ -281,6 +281,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .contact-label {
@@ -383,13 +384,110 @@
   margin-bottom: 1rem;
 }
 
-.contact-input.ng-invalid.ng-touched.ng-dirty {
-  background-color: #fbdcd6;
-  border-color: #f84e2c;
+
+.file-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  color: inherit;              
+  background: transparent;
+  border: 1px solid #c8b89a;
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
-.contact-field:has(.ng-invalid.ng-touched.ng-dirty) .contact-label {
-  color: #f84e2c;
+.file-selected {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  color: inherit;              
+  background: transparent;
+  border: 1px solid #c8b89a;
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.file-name {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 0.8rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.required-star {
+  color: #c0392b;
+  font-size: 0.7rem;
+}
+
+.contact-error-text {
+  color: #c0392b;
+  font-size: 0.8rem;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 2px;
+}
+
+.contact-input-error {
+  border-color: #c0392b;
+
+  &:focus {
+    border-color: #c0392b;
+  }
 }
 
 /* ── media queries ── */

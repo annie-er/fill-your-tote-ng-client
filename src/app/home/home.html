@@ -20,9 +20,9 @@
         <h2 class="welcome-card-title">Who We Are</h2>
         <hr class="welcome-card-divider" />
         <p class="welcome-card-text">
-          Fill Your Tote! is a one-woman shop run by Annie, a Computer Science student at the University of Toronto. 
-          What started as a passion project became a small business in June 2023 through Summer Company. 
-          Annie enjoys creating visual stories on tote bags for people to wear. 
+          Fill Your Tote! is run by Annie, a Computer Science student at the University of Toronto. 
+          What started as a personal interest became a small business in June 2023 through Summer Company. 
+          Annie enjoys creating visual stories on tote bags. 
           Her drawings revolve around friendship, human emotion, and love.
         </p>
       </div>
@@ -34,7 +34,7 @@
           Our mission is simple: to connect our community with thoughtfully
           crafted, eco-friendly tote bags while fostering meaningful
           relationships between clients and creators.
-          Fill Your Tote! strives to offer compelling, artsy tote bags that resonate with the people who carry them (no more boring totes).        
+          Fill Your Tote! hopes to offer compelling tote bags that resonate with the people who carry them.        
         </p>
       </div>
     </div>
@@ -51,7 +51,7 @@
         <img src="/process-step-one.png" alt="Step 1" class="process-card-image" />
         <h3 class="process-card-title">Step 1. Discuss</h3>
         <p class="process-card-text">
-          Tell us your vision and we'll bring it to life though a compelling design on an eco-friendly canvas tote. 
+          Tell us your vision and we'll bring it to life though a compelling design on a canvas tote. 
         </p>
       </div>
 
@@ -59,7 +59,7 @@
         <img src="/process-step-two.png" alt="Step 2" class="process-card-image" />
         <h3 class="process-card-title">Step 2. Design</h3>
         <p class="process-card-text">
-          After providing a few sample designs, you pick a final design that we handcraft onto your totes. 
+          After providing a few sample designs, you pick a final design that we draw onto your totes. 
         </p>
       </div>
 
@@ -67,7 +67,7 @@
         <img src="/process-step-three.png" alt="Step 3" class="process-card-image" />
         <h3 class="process-card-title">Step 3. Deliver</h3>
         <p class="process-card-text">
-          Your one-of-a-kind tote is carefully packaged and delivered to your door. You can finally start wearing them!
+          Your one-of-a-kind tote is packaged and delivered to your door. You can finally start wearing them!
         </p>
       </div>
     </div>
@@ -126,17 +126,26 @@
 
       <!-- Form -->
       @if (submitStatus !== 'success') {
-        <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" >
+        <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
 
           <div class="contact-row">
             <div class="contact-field">
-              <label class="contact-label" for="fullName">Full Name</label>
+              <label class="contact-label" for="fullName">
+                Full Name <sup class="required-star">*</sup>
+              </label>
               <input class="contact-input" id="fullName" name="fullName"
-                type="text" 
+                type="text"
                 ngModel
                 required
-                [disabled]="isSubmitting" />
+                #fullNameInput="ngModel"
+                [class.contact-input-error]="fullNameInput.invalid && (fullNameInput.touched || formSubmitted)"
+                [disabled]="isSubmitting" 
+              />
+              @if (fullNameInput.invalid && (fullNameInput.touched || formSubmitted)) {
+                <span class="contact-error-text">Full name is required</span>
+              }
             </div>
+
             <div class="contact-field">
               <label class="contact-label" for="pronouns">Pronouns</label>
               <input class="contact-input" id="pronouns" name="pronouns"
@@ -148,17 +157,28 @@
 
           <div class="contact-row">
             <div class="contact-field">
-              <label class="contact-label" for="email">Email address</label>
+              <label class="contact-label" for="email">
+                Email address <sup class="required-star">*</sup>
+              </label>
               <input class="contact-input" id="email" name="email"
-                type="email" 
+                type="email"
                 required
                 email
                 ngModel
-                [disabled]="isSubmitting" 
-                #emailInput="ngModel"/>
+                [class.contact-input-error]="emailInput.invalid && (emailInput.touched || formSubmitted)"
+                [disabled]="isSubmitting"
+                #emailInput="ngModel" />
+              @if (emailInput.invalid && (emailInput.touched || formSubmitted)) {
+                <span class="contact-error-text">
+                  {{ emailInput.errors?.['required'] ? 'Email is required' : 'Please enter a valid email' }}
+                </span>
+              }
             </div>
+
             <div class="contact-field">
-              <label class="contact-label" for="company">Company <span class="contact-helper">if applicable</span></label>
+              <label class="contact-label" for="company">
+                Company <span class="contact-helper">if applicable</span>
+              </label>
               <input class="contact-input" id="company" name="company"
                 type="text"
                 ngModel
@@ -192,19 +212,54 @@
           </div>
 
           <div class="contact-field">
-            <label class="contact-label" for="message">I'd like to chat about</label>
+            <label class="contact-label" for="message">
+              I'd like to chat about <sup class="required-star">*</sup>
+            </label>
             <textarea class="contact-input contact-textarea" id="message" name="message"
               rows="4"
               required
               ngModel
-              [disabled]="isSubmitting"></textarea>
+              [class.contact-input-error]="messageInput.invalid && (messageInput.touched || formSubmitted)"
+              [disabled]="isSubmitting"
+              #messageInput="ngModel"></textarea>
+            @if (messageInput.invalid && (messageInput.touched || formSubmitted)) {
+              <span class="contact-error-text">Please tell me what you'd like to chat about</span>
+            }
+          </div>
+
+          <div class="contact-field">
+            @if (!selectedFile) {
+              <label class="file-upload-btn" for="fileInput">
+                <mat-icon>attach_file</mat-icon>
+                <span>Attach file</span>
+                <input id="fileInput"
+                      type="file"
+                      accept=".jpg,.jpeg,.png,.gif,.webp,.pdf"
+                      (change)="onFileSelected($event)"
+                      [disabled]="isSubmitting"
+                      hidden />
+              </label>
+            } @else {
+              <div class="file-selected">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span class="file-name">{{ selectedFile.name }}</span>
+                <button type="button" class="file-remove-btn" (click)="removeFile()" [disabled]="isSubmitting">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            }
+
+            @if (fileError) {
+              <span class="contact-error-text">{{ fileError }}</span>
+            }
           </div>
 
           <div class="contact-submit">
-            <button class="contact-button" type="submit" [disabled]="isSubmitting || contactForm.invalid">
+            <button class="contact-button" type="submit" [disabled]="isSubmitting">
               {{ isSubmitting ? 'Sending...' : 'Send it!' }}
             </button>
           </div>
+
         </form>
       }
     </div>

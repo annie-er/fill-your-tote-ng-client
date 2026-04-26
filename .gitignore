@@ -37,6 +37,8 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+environments/*.ts
+nginx.conf
 
 # System files
 .DS_Store

@@ -7,4 +7,5 @@ export interface ContactMessage {
   dueDate?: string;
   budget?: string;
   message: string;
+  attachmentUrl?: string;
 }

@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap, throwError } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { CartItem, CartSummary } from '../models/cart.model';
 
 @Injectable({
