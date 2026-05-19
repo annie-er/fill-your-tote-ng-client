@@ -28,7 +28,6 @@ export class Checkout implements OnInit {
 
   isLoading = signal(false);
   isStripeReady = signal(false);
-  paymentSuccess = signal(false);
   errorMessage = signal('');
 
   elementsOptions = signal<StripeElementsOptions>({
@@ -97,8 +96,7 @@ export class Checkout implements OnInit {
         if (result.error) {
           this.errorMessage.set(result.error.message || 'Payment failed.');
         } else if (result.paymentIntent?.status === 'succeeded') {
-          this.cartService.clearCart().subscribe();  // clear the cart after successful payment
-          this.paymentSuccess.set(true);
+          // this.cartService.clearCart().subscribe();  // clear the cart after successful payment
           this.router.navigate(['/checkout/success']);
         }
         this.isLoading.set(false);

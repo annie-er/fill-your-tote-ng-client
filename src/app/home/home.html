@@ -111,21 +111,21 @@
       <h2 class="contact-title">Get In Touch!</h2>
 
       <!-- Success message -->
-      @if (submitStatus === 'success') {
+      @if (submitStatus() === 'success') {
         <div class="contact-success">
           <p>Thank you! I'll be in touch soon.</p>
         </div>
       }
 
       <!-- Error message -->
-      @if (submitStatus === 'error') {
+      @if (submitStatus() === 'error') {
         <div class="contact-error">
           <p>Something went wrong. Please try again!</p>
         </div>
       }
 
       <!-- Form -->
-      @if (submitStatus !== 'success') {
+      @if (submitStatus() !== 'success') {
         <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
 
           <div class="contact-row">
@@ -138,10 +138,10 @@
                 ngModel
                 required
                 #fullNameInput="ngModel"
-                [class.contact-input-error]="fullNameInput.invalid && (fullNameInput.touched || formSubmitted)"
-                [disabled]="isSubmitting" 
+                [class.contact-input-error]="fullNameInput.invalid && (fullNameInput.touched || formSubmitted())"
+                [disabled]="isSubmitting()" 
               />
-              @if (fullNameInput.invalid && (fullNameInput.touched || formSubmitted)) {
+              @if (fullNameInput.invalid && (fullNameInput.touched || formSubmitted())) {
                 <span class="contact-error-text">Full name is required</span>
               }
             </div>
@@ -151,7 +151,7 @@
               <input class="contact-input" id="pronouns" name="pronouns"
                 type="text"
                 ngModel
-                [disabled]="isSubmitting" />
+                [disabled]="isSubmitting()" />
             </div>
           </div>
 
@@ -165,10 +165,10 @@
                 required
                 email
                 ngModel
-                [class.contact-input-error]="emailInput.invalid && (emailInput.touched || formSubmitted)"
-                [disabled]="isSubmitting"
+                [class.contact-input-error]="emailInput.invalid && (emailInput.touched || formSubmitted())"
+                [disabled]="isSubmitting()"
                 #emailInput="ngModel" />
-              @if (emailInput.invalid && (emailInput.touched || formSubmitted)) {
+              @if (emailInput.invalid && (emailInput.touched || formSubmitted())) {
                 <span class="contact-error-text">
                   {{ emailInput.errors?.['required'] ? 'Email is required' : 'Please enter a valid email' }}
                 </span>
@@ -182,7 +182,7 @@
               <input class="contact-input" id="company" name="company"
                 type="text"
                 ngModel
-                [disabled]="isSubmitting" />
+                [disabled]="isSubmitting()" />
             </div>
           </div>
 
@@ -191,7 +191,7 @@
             <input class="contact-input" id="website" name="websiteOrProfile"
               type="text"
               ngModel
-              [disabled]="isSubmitting" />
+              [disabled]="isSubmitting()" />
           </div>
 
           <div class="contact-row">
@@ -200,14 +200,14 @@
               <input class="contact-input" id="budget" name="budget"
                 type="text" placeholder="e.g. $200–$350"
                 ngModel
-                [disabled]="isSubmitting" />
+                [disabled]="isSubmitting()" />
             </div>
             <div class="contact-field">
               <label class="contact-label" for="dueDate">Approx. due date</label>
               <input class="contact-input" id="dueDate" name="dueDate"
                 type="date"
                 ngModel
-                [disabled]="isSubmitting" />
+                [disabled]="isSubmitting()" />
             </div>
           </div>
 
@@ -219,16 +219,16 @@
               rows="4"
               required
               ngModel
-              [class.contact-input-error]="messageInput.invalid && (messageInput.touched || formSubmitted)"
-              [disabled]="isSubmitting"
+              [class.contact-input-error]="messageInput.invalid && (messageInput.touched || formSubmitted())"
+              [disabled]="isSubmitting()"
               #messageInput="ngModel"></textarea>
-            @if (messageInput.invalid && (messageInput.touched || formSubmitted)) {
+            @if (messageInput.invalid && (messageInput.touched || formSubmitted())) {
               <span class="contact-error-text">Please tell me what you'd like to chat about</span>
             }
           </div>
 
           <div class="contact-field">
-            @if (!selectedFile) {
+            @if (!selectedFile()) {
               <label class="file-upload-btn" for="fileInput">
                 <mat-icon>attach_file</mat-icon>
                 <span>Attach file</span>
@@ -236,27 +236,27 @@
                       type="file"
                       accept=".jpg,.jpeg,.png,.gif,.webp,.pdf"
                       (change)="onFileSelected($event)"
-                      [disabled]="isSubmitting"
+                      [disabled]="isSubmitting()"
                       hidden />
               </label>
             } @else {
               <div class="file-selected">
                 <mat-icon>insert_drive_file</mat-icon>
-                <span class="file-name">{{ selectedFile.name }}</span>
-                <button type="button" class="file-remove-btn" (click)="removeFile()" [disabled]="isSubmitting">
+                <span class="file-name">{{ selectedFile()!.name }}</span>
+                <button type="button" class="file-remove-btn" (click)="removeFile()" [disabled]="isSubmitting()">
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
             }
 
-            @if (fileError) {
-              <span class="contact-error-text">{{ fileError }}</span>
+            @if (fileError()) {
+              <span class="contact-error-text">{{ fileError() }}</span>
             }
           </div>
 
           <div class="contact-submit">
-            <button class="contact-button" type="submit" [disabled]="isSubmitting">
-              {{ isSubmitting ? 'Sending...' : 'Send it!' }}
+            <button class="contact-button" type="submit" [disabled]="isSubmitting()">
+              {{ isSubmitting() ? 'Sending...' : 'Send it!' }}
             </button>
           </div>
 

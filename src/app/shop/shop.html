@@ -26,26 +26,26 @@
     </div>
   }
 
-  @if (showCartNotification) {
+  @if (showCartNotification()) {
     <app-cart-notification
-      [productName]="notificationProduct"
-      [quantity]="notificationQuantity"
-      (close)="showCartNotification = false"
+      [productName]="notificationProduct()"
+      [quantity]="notificationQuantity()"
+      (close)="showCartNotification.set(false)"
       (viewCart)="goToCart()"
     />
   }
 
-  @if (showFavouriteNotification) {
+  @if (showFavouriteNotification()) {
     <app-favourite-notification
-      [productName]="notificationProduct"
-      (close)="showFavouriteNotification = false"
+      [productName]="notificationProduct()"
+      (close)="showFavouriteNotification.set(false)"
       (viewFavourites)="goToFavourites()"
     />
   }
 
-  @if (showAuthNotification) {
+  @if (showAuthNotification()) {
     <app-auth-notification
-      (close)="showAuthNotification = false"
+      (close)="showAuthNotification.set(false)"
       (viewAuth)="goToLogin()"
     />
   }

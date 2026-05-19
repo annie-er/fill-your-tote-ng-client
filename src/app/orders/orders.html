@@ -1,0 +1,55 @@
+<div class="orders-container">
+
+  @if (!isAuthenticated()) {
+    <div class="orders-empty">
+      <p class="auth-message">You must be logged in to view your orders.</p>
+      <button class="view-auth-btn" (click)="onViewAuth()">Sign in</button>
+    </div>
+  } @else {
+
+    @if (loadedOrders().length === 0) {
+      <div class="orders-empty">
+        <p>No orders yet.</p>
+        <button class="btn-shop" (click)="goToShop()">Go to Shop</button>
+      </div>
+    } @else {
+
+      @for (order of loadedOrders(); track order.id) {
+        <div class="order-card">
+
+          <div class="order-header">
+            <span class="order-date">Ordered on {{ order.datePurchased | date:'mediumDate' }}</span>
+            <span class="order-total">Order Total: ${{ order.totalAmount }}</span>
+          </div>
+
+          <div class="order-table-header">
+            <span>Product</span>
+            <span class="col-center">Qty</span>
+            <span class="col-center">Price per bag</span>
+          </div>
+
+          @for (item of order.items; track item.productName) {
+            <div class="order-item">
+              <div class="order-item-product">
+                <div class="order-item-image-wrapper">
+                  <img [src]="item.imageUrl" [alt]="item.productName" class="order-item-image" />
+                </div>
+                <div class="order-item-info">
+                  <h3 class="order-item-name">{{ item.productName }}</h3>
+                  <p class="order-item-description">{{ item.description }}</p>
+                </div>
+              </div>
+
+              <span class="order-item-quantity col-center">{{ item.quantity }}</span>
+              <span class="order-item-price col-center">${{ item.priceAtPurchase }}</span>
+            </div>
+          }
+
+        </div>
+      }
+
+    }
+
+  }
+
+</div>

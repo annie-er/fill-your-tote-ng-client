@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavouritesService } from '../services/favourites.service';
 import { CartService } from '../services/cart.service';
@@ -23,8 +23,8 @@ export class Favourites implements OnInit {
   favouriteItems = this.favouritesService.loadedFavouriteItems;
   isAuthenticated = this.authService.isAuthenticated;
 
-  showNotification = false;
-  notificationProduct = '';
+  showNotification = signal(false);
+  notificationProduct = signal('');
 
   ngOnInit() {
     if (!this.authService.isAuthenticated()) return;
@@ -36,13 +36,13 @@ export class Favourites implements OnInit {
   }
 
   addToCart(item: any) {
-    this.notificationProduct = item.name;
-    this.showNotification = true;
-    setTimeout(() => this.showNotification = false, 4000);
+    this.notificationProduct.set(item.name);
+    this.showNotification.set(true);
+    setTimeout(() => this.showNotification.set(false), 4000);
 
     const subscription = this.cartService.addToCart(Number(item.productId), 1).subscribe({
       error: (error: Error) => {
-        this.showNotification = false;
+        this.showNotification.set(false);
         console.error(error.message);
       }
     });

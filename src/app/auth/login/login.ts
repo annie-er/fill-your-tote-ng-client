@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -14,6 +14,8 @@ import { finalize } from 'rxjs';
   styleUrl: './login.css',
 })
 export class Login {
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   form = new FormGroup({
     email: new FormControl('', {
@@ -29,8 +31,6 @@ export class Login {
   errorMessage = signal('');
   isLoading = signal(false);
   showPassword = false;
-
-  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
     if (this.form.invalid) return;

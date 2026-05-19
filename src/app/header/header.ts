@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../core/services/auth.service';
@@ -14,43 +14,43 @@ export class Header {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  favouritesHover = false;
+  favouritesHover = false; // leave as plain properties as they're only ever set in the template, not in the typescript code
   cartHover = false;
   accountHover = false;
-  showAccountPanel = false;
+  showAccountPanel = signal(false);
 
   isAuthenticated = this.authService.isAuthenticated;
   currentUser = this.authService.currentUser;
 
-  isHidden = false;
+  isHidden = signal(false);
   private lastScrollY = 0;
 
   @HostListener('window:scroll')
   onScroll() {
     const currentScrollY = window.scrollY;
-    this.isHidden = currentScrollY > this.lastScrollY && currentScrollY > 100;
+    this.isHidden.set(currentScrollY > this.lastScrollY && currentScrollY > 100);
     this.lastScrollY = currentScrollY;
   }
 
   toggleAccountPanel() {
-    this.showAccountPanel = !this.showAccountPanel;
+    this.showAccountPanel.set(!this.showAccountPanel());
   }
 
   closeAccountPanel() {
-    this.showAccountPanel = false;
+    this.showAccountPanel.set(false);
   }
 
   goTo(path: string) {
-    this.showAccountPanel = false;
+    this.showAccountPanel.set(false);
     this.router.navigate([path]);
   }
 
   scrollToContact() {
     if (this.router.url === '/') {
-      // Already on home page; scroll directly
+      // already on home page; scroll directly
       this.scrollToContactSection();
     } else {
-      // Navigate to home first, then scroll after navigation completes
+      // navigate to home first, then scroll after navigation completes
       this.router.navigate(['/']).then(() => {
         setTimeout(() => this.scrollToContactSection(), 100);
       });

@@ -16,7 +16,7 @@
 
       <!-- Left arrow column -->
       <div class="nav-col">
-        @if (hasPrevious) {
+        @if (hasPrevious()) {
           <button class="nav-btn" (click)="navigate('prev')">
             <mat-icon>arrow_back</mat-icon>
           </button>
@@ -34,7 +34,7 @@
 
       <!-- Right arrow column -->
       <div class="nav-col">
-        @if (hasNext) {
+        @if (hasNext()) {
           <button class="nav-btn" (click)="navigate('next')">
             <mat-icon>arrow_forward</mat-icon>
           </button>

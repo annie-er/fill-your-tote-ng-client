@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject, input } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShopService } from '../../services/shop.service';
 import { CartService } from '../../services/cart.service';
@@ -28,9 +28,9 @@ export class ProductDetail {
 
   allProducts = this.shopService.getProductsSignal();
 
-  showCartNotification = false;
-  showFavouriteNotification = false;
-  showAuthNotification = false; 
+  showCartNotification = signal(false);
+  showFavouriteNotification = signal(false);
+  showAuthNotification = signal(false);
 
   product = computed(() =>
     this.allProducts().find(p => p.slug === this.identifier() || String(p.id) === this.identifier())
@@ -40,8 +40,8 @@ export class ProductDetail {
     this.allProducts().findIndex(p => p.id === this.product()?.id)
   );
 
-  get hasPrevious(): boolean { return this.currentIndex() > 0; }
-  get hasNext(): boolean { return this.currentIndex() < this.allProducts().length - 1; }
+  hasPrevious = computed(() => this.currentIndex() > 0);
+  hasNext = computed(() => this.currentIndex() < this.allProducts().length - 1);
 
   navigate(direction: 'prev' | 'next') {
     const newIndex = direction === 'prev' ? this.currentIndex() - 1 : this.currentIndex() + 1;
@@ -59,12 +59,12 @@ export class ProductDetail {
     const product = this.product();
     if (product) {
       // show notification immediately, don't wait for HTTP
-      this.showCartNotification = true;
-      setTimeout(() => this.showCartNotification = false, 4000);
+      this.showCartNotification.set(true);
+      setTimeout(() => this.showCartNotification.set(false), 4000);
 
       const subscription = this.cartService.addToCart(product.id, this.quantity).subscribe({
         error: (error: Error) => {
-          this.showCartNotification = false; // hide if request fails
+          this.showCartNotification.set(false); // hide if request fails
           console.error(error.message);
         }
       });
@@ -77,19 +77,18 @@ export class ProductDetail {
     const product = this.product();
     if (!product) return;
 
-    // ← check auth first
     if (!this.authService.isAuthenticated()) {
-      this.showAuthNotification = true;
-      setTimeout(() => this.showAuthNotification = false, 4000);
+      this.showAuthNotification.set(true);
+      setTimeout(() => this.showAuthNotification.set(false), 4000);
       return;
     }
 
-    this.showFavouriteNotification = true;
-    setTimeout(() => this.showFavouriteNotification = false, 4000);
+    this.showFavouriteNotification.set(true);
+    setTimeout(() => this.showFavouriteNotification.set(false), 4000);
 
     const subscription = this.favouritesService.addToFavourites(product.id).subscribe({
       error: (error: Error) => {
-        this.showFavouriteNotification = false;
+        this.showFavouriteNotification.set(false);
         console.error(error.message);
       }
     });

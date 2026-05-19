@@ -1,4 +1,4 @@
- <header class="header" [class.hidden]="isHidden">
+ <header class="header" [class.hidden]="isHidden()">
     <div class="header-container">
         <!-- logo -->
         <a routerLink="/" class="logo-link">fill your tote!</a>
@@ -47,12 +47,12 @@
 </header>
 
 <!-- Overlay backdrop -->
-@if (showAccountPanel) {
+@if (showAccountPanel()) {
   <div class="panel-backdrop" (click)="closeAccountPanel()"></div>
 }
 
 <!-- Slide-in panel -->
-<div class="account-panel" [class.open]="showAccountPanel">
+<div class="account-panel" [class.open]="showAccountPanel()">
   <button class="panel-close-btn" (click)="closeAccountPanel()">
     <mat-icon>close</mat-icon>
   </button>
@@ -65,5 +65,9 @@
     </div>
   } @else {
     <p class="panel-title">Hello, {{ currentUser()?.firstName }}!</p>
+    <a routerLink="/orders" class="orders" (click)="closeAccountPanel()">
+      View Order History
+      <mat-icon>arrow_forward</mat-icon>
+    </a>
   }
 </div>

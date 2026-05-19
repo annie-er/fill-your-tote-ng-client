@@ -109,6 +109,7 @@
   cursor: pointer;
   color: #333;
   transition: background-color 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .quantity-btn mat-icon {
@@ -150,7 +151,7 @@
   background: none;
   cursor: pointer;
   color: #888;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 
@@ -186,7 +187,7 @@
   border-radius: 0.75rem;
   padding: 0.75rem 2rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .btn-shop:hover {
@@ -260,7 +261,7 @@
   border-radius: 12px;
   padding: 1rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   width: 100%;
 }
 

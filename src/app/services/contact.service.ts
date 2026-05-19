@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ContactMessage } from '../models/contact-message.model';
@@ -8,9 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ContactService {
+  private httpClient = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/contact`;
-
-  constructor(private http: HttpClient) {}
 
   submitContactForm(message: ContactMessage, file?: File): Observable<ContactMessage> {
     const formData = new FormData();
@@ -26,6 +25,6 @@ export class ContactService {
     if (message.budget)          formData.append('budget', message.budget);
     if (file)                    formData.append('file', file);
 
-    return this.http.post<ContactMessage>(this.apiUrl, formData);
+    return this.httpClient.post<ContactMessage>(this.apiUrl, formData);
   }
 }

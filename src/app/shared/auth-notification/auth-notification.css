@@ -51,9 +51,11 @@
 
 .auth-notification-item {
   font-family: 'Gamja Flower', sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.82rem;
   color: #333;
   margin: 0;
+  font-family: 'Nunito', sans-serif;
+  color: #aaa;
 }
 
 

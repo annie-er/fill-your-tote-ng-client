@@ -20,12 +20,12 @@
   cursor: pointer;
   color: #333;
   padding: 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease;
   z-index: 201;
 }
 
 .close-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .close-btn mat-icon {
@@ -55,11 +55,11 @@
   cursor: pointer;
   color: #333;
   padding: 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .nav-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .nav-btn mat-icon {
@@ -294,10 +294,11 @@
   color: #333;
   line-height: 1;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
 .quantity-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .quantity-value {
@@ -343,7 +344,7 @@
   border: 1px solid #333;
   background-color: #fdebf3;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease;
   flex-shrink: 0;
 }
 

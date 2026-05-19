@@ -29,10 +29,6 @@
   transition: color 0.2s ease;
 }
 
-.close-btn:hover {
-  color: #333;
-}
-
 .close-btn mat-icon {
   font-size: 1rem;
   width: 1rem;
@@ -77,7 +73,3 @@
   transition: opacity 0.2s ease;
   margin-top: 0.5rem;
 }
-
-/* .view-cart-btn:hover {
-  opacity: 0.8;
-} */

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CartItem, CartSummary } from '../models/cart.model';
 
@@ -17,7 +17,7 @@ export class CartService {
   loadedCartItems = this.cartItems.asReadonly();
   loadedCartSummary = this.cartSummary.asReadonly();
 
-  loadCartItems() {
+  loadCartItems(): Observable<CartItem[]> {
     return this.httpClient
       .get<CartItem[]>(`${this.baseUrl}/cart`)
       .pipe(
@@ -30,7 +30,7 @@ export class CartService {
       );
   }
 
-  loadCartSummary() {
+  loadCartSummary(): Observable<CartSummary> {
     return this.httpClient
       .get<CartSummary>(`${this.baseUrl}/cart/summary`)
       .pipe(
@@ -43,7 +43,7 @@ export class CartService {
       );
   }
 
-  addToCart(productId: number, quantity: number = 1) {
+  addToCart(productId: number, quantity: number = 1): Observable<CartItem> {
     const prevItems = this.cartItems();
 
     // optimistic update — if item already exists, increment quantity locally
@@ -72,7 +72,7 @@ export class CartService {
       );
   }
 
-  updateCartItemQuantity(itemId: number, quantity: number) {
+  updateCartItemQuantity(itemId: number, quantity: number): Observable<unknown> {
     const prevItems = this.cartItems();
 
     this.cartItems.set(
@@ -93,7 +93,7 @@ export class CartService {
       );
   }
 
-  removeFromCart(itemId: number) {
+  removeFromCart(itemId: number): Observable<unknown> {
     const prevItems = this.cartItems();
 
     this.cartItems.set(prevItems.filter(i => i.id !== itemId));
@@ -111,7 +111,7 @@ export class CartService {
       );
   }
 
-  clearCart() {
+  clearCart(): Observable<unknown> {
     const prevItems = this.cartItems();
 
     // optimistic update

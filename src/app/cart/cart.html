@@ -29,12 +29,12 @@
             </div>
 
             <div class="cart-item-quantity col-center">
-              <button class="icon-btn quantity-btn" (click)="increment(item.id, item.quantity)">
-                <mat-icon>add</mat-icon>
-              </button>
-              <span class="quantity-value">{{ item.quantity }}</span>
               <button class="icon-btn quantity-btn" (click)="decrement(item.id, item.quantity)" [disabled]="item.quantity <= 1">
                 <mat-icon>remove</mat-icon>
+              </button>
+              <span class="quantity-value">{{ item.quantity }}</span>
+              <button class="icon-btn quantity-btn" (click)="increment(item.id, item.quantity)">
+                <mat-icon>add</mat-icon>
               </button>
             </div>
 

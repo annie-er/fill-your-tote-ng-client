@@ -20,14 +20,12 @@ export class AuthService {
     isAuthenticated = computed(() => this._token() !== null);
 
     constructor(private http: HttpClient, private router: Router) {
-        // Run expiry check on app load instead of blindly loading from storage
         const token = localStorage.getItem(this.TOKEN_KEY);
         if (token && !this.isTokenExpired(token)) {
             this._token.set(token);
             const stored = localStorage.getItem(this.USER_KEY);
             this._currentUser.set(stored ? JSON.parse(stored) : null);
         } else {
-            // Token missing or expired; clear storage
             localStorage.removeItem(this.TOKEN_KEY);
             localStorage.removeItem(this.USER_KEY);
         }

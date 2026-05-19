@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { FavouriteItem } from '../models/favourite.model';
 
@@ -15,7 +15,7 @@ export class FavouritesService {
 
   loadedFavouriteItems = this.favouriteItems.asReadonly();
 
-  loadFavouriteItems() {
+  loadFavouriteItems(): Observable<FavouriteItem[]> {
     return this.httpClient
       .get<FavouriteItem[]>(`${this.baseUrl}/favourites`)
       .pipe(
@@ -28,7 +28,7 @@ export class FavouritesService {
       );
   }
 
-  addToFavourites(productId: number) {
+  addToFavourites(productId: number): Observable<FavouriteItem> {
     const prevItems = this.favouriteItems();
 
     return this.httpClient
@@ -44,7 +44,7 @@ export class FavouritesService {
       );
   }
 
-  removeFromFavourites(itemId: number) {
+  removeFromFavourites(itemId: number): Observable<unknown> {
     const prevItems = this.favouriteItems();
 
     this.favouriteItems.set(prevItems.filter(i => i.id !== itemId));
@@ -59,7 +59,7 @@ export class FavouritesService {
       );
   }
 
-  clearFavourites() {
+  clearFavourites(): Observable<unknown> {
     const prevItems = this.favouriteItems();
 
     this.favouriteItems.set([]);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactService } from '../services/contact.service';
@@ -18,14 +18,16 @@ interface FaqItem {
   styleUrl: './home.css',
 })
 export class Home {
-  isSubmitting = false;
-  submitStatus: 'success' | 'error' | null = null;
-  expandedQuestion: number | null = null;
+  private contactService = inject(ContactService);
 
-  // File upload
-  selectedFile: File | null = null;
-  fileError = '';
-  formSubmitted = false;
+  isSubmitting = signal(false);
+  submitStatus = signal<null | 'success' | 'error'>(null);
+  expandedQuestion = signal<number | null>(null);
+
+  // file upload
+  selectedFile = signal<File | null>(null);
+  fileError = signal('');
+  formSubmitted = signal(false);
 
   readonly allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
   readonly maxFileSize = 5 * 1024 * 1024; // 5MB
@@ -48,49 +50,47 @@ export class Home {
     }
   ];
 
-  constructor(private contactService: ContactService) {}
-
   toggleQuestion(questionId: number): void {
-    this.expandedQuestion = this.expandedQuestion === questionId ? null : questionId;
+    this.expandedQuestion.set(this.expandedQuestion() === questionId ? null : questionId);
   }
 
   isExpanded(questionId: number): boolean {
-    return this.expandedQuestion === questionId;
+    return this.expandedQuestion() === questionId;
   }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
-    this.fileError = '';
-    this.selectedFile = null;
+    this.fileError.set('');
+    this.selectedFile.set(null);
 
     if (!file) return;
 
     if (!this.allowedTypes.includes(file.type)) {
-      this.fileError = 'Invalid file type. Please upload a JPEG, PNG, GIF, WebP, or PDF.';
+      this.fileError.set('Invalid file type. Please upload a JPEG, PNG, GIF, WebP, or PDF.');
       return;
     }
 
     if (file.size > this.maxFileSize) {
-      this.fileError = 'File must not exceed 5MB.';
+      this.fileError.set('File must not exceed 5MB.');
       return;
     }
 
-    this.selectedFile = file;
+    this.selectedFile.set(file);
   }
 
   removeFile() {
-    this.selectedFile = null;
-    this.fileError = '';
+    this.selectedFile.set(null);
+    this.fileError.set('');
   }
 
   onSubmit(form: NgForm) {
-    this.formSubmitted = true;   
+    this.formSubmitted.set(true);   
 
     if (form.invalid) return;    
 
-    this.isSubmitting = true;
-    this.submitStatus = null;
+    this.isSubmitting.set(true);
+    this.submitStatus.set(null);
 
     const contactData: ContactMessage = {
       fullName: form.value.fullName,
@@ -103,17 +103,17 @@ export class Home {
       message: form.value.message
     };
 
-    this.contactService.submitContactForm(contactData, this.selectedFile ?? undefined).subscribe({
+    this.contactService.submitContactForm(contactData, this.selectedFile() ?? undefined).subscribe({
       next: () => {
-        this.submitStatus = 'success';
-        this.isSubmitting = false;
-        this.selectedFile = null;
-        this.formSubmitted = false;   // ← reset on success
+        this.submitStatus.set('success');
+        this.isSubmitting.set(false);
+        this.selectedFile.set(null);
+        this.formSubmitted.set(false);   // reset on success
         form.reset();
       },
       error: () => {
-        this.submitStatus = 'error';
-        this.isSubmitting = false;
+        this.submitStatus.set('error');
+        this.isSubmitting.set(false);
       }
     });
   }

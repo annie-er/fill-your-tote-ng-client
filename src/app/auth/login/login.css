@@ -131,8 +131,8 @@ input {
   border-radius: 12px;
   padding: 1rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
   text-transform: uppercase;
+  transition: transform 0.2s ease;
   
   &:hover:not(:disabled) {
     transform: scale(1.02);

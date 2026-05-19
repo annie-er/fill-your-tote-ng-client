@@ -108,6 +108,25 @@ header.hidden {
   padding: 0;
 }
 
+.orders {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.75rem 0;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.orders:hover {
+  transform: scale(1.01);
+}
+
 /* Backdrop */
 .panel-backdrop {
   position: fixed;
@@ -150,10 +169,6 @@ header.hidden {
   display: flex;
   align-items: center;
   padding: 4px;
-
-  &:hover {
-    opacity: 0.6;
-  }
 }
 
 .panel-title {
@@ -182,7 +197,7 @@ header.hidden {
   transition: opacity 0.2s ease;
 
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
   }
 
   &.primary {

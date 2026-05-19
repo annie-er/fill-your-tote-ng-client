@@ -1,110 +1,103 @@
 <div class="checkout-container">
-  @if (paymentSuccess()) {
-    <div class="success-message">
-      <h2 class="checkout-title">Payment successful!</h2>
-      <p>Thank you for your order.</p>
-    </div>
-  } @else {
-    <h2 class="checkout-title">Checkout</h2>
+  <h2 class="checkout-title">Checkout</h2>
 
-    @if (errorMessage()) {
-      <p class="error-message">{{ errorMessage() }}</p>
-    }
+  @if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  }
 
-    <div class="checkout-layout">
+  <div class="checkout-layout">
 
-      <!-- Left: form -->
-      <form [formGroup]="checkoutForm" (ngSubmit)="pay()" class="checkout-form">
+    <!-- Left: form -->
+    <form [formGroup]="checkoutForm" (ngSubmit)="pay()" class="checkout-form">
 
-        <!-- Contact Information -->
-        <div class="form-section">
-          <h3 class="section-title">Contact Information</h3>
-          <div class="form-row">
-            <div class="form-field">
-              <input type="text" formControlName="fullName" class="form-input" placeholder="Full Name*" />
-            </div>
-            <div class="form-field">
-              <input type="email" formControlName="email" class="form-input" placeholder="Email Address*" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Shipping Information -->
-        <div class="form-section">
-          <h3 class="section-title">Shipping Information</h3>
+      <!-- Contact Information -->
+      <div class="form-section">
+        <h3 class="section-title">Contact Information</h3>
+        <div class="form-row">
           <div class="form-field">
-            <input type="text" formControlName="address" class="form-input" placeholder="Address*" />
+            <input type="text" formControlName="fullName" class="form-input" placeholder="Full Name*" />
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <input type="text" formControlName="city" class="form-input" placeholder="City*" />
-            </div>
-            <div class="form-field">
-              <input type="text" formControlName="postalCode" class="form-input" placeholder="Postal Code*" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Payment -->
-        <div class="form-section">
-          <h3 class="section-title">Payment</h3>
-          @if (elementsOptions().clientSecret) {
-            <ngx-stripe-payment [elementsOptions]="elementsOptions()" />
-          } @else {
-            <p class="loading-payment">Loading payment form...</p>
-          }
-        </div>
-
-        <button type="submit" class="btn-pay" [disabled]="isLoading() || checkoutForm.invalid">
-          {{ isLoading() ? 'Processing...' : 'Purchase' }}
-        </button>
-
-      </form>
-
-      <!-- Right: order summary -->
-      <div class="checkout-summary">
-        <h3 class="section-title">Your Order</h3>
-
-        <!-- Items list -->
-        <div class="checkout-items">
-          @for (item of cartItems(); track item.id) {
-            <div class="checkout-item">
-              <div class="checkout-item-image-wrapper">
-                <img [src]="item.image" [alt]="item.name" class="checkout-item-image" />
-              </div>
-              <div class="checkout-item-info">
-                <p class="checkout-item-name">{{ item.name }}</p>
-                <p class="checkout-item-qty">Qty: {{ item.quantity }}</p>
-              </div>
-              <span class="checkout-item-price">${{ item.price * item.quantity }}</span>
-            </div>
-          }
-        </div>
-
-        <hr class="summary-divider" />
-
-        <!-- Totals -->
-        <div class="summary-rows">
-          <div class="summary-row">
-            <span>Subtotal</span>
-            <span>${{ cartSummary().subtotal }}</span>
-          </div>
-          <div class="summary-row">
-            <span>Tax (13%)</span>
-            <span>${{ cartSummary().vatAmount }}</span>
-          </div>
-          <div class="summary-row">
-            <span>Delivery</span>
-            <span>Free</span>
-          </div>
-          <hr class="summary-divider" />
-          <div class="summary-row summary-total">
-            <span>Total</span>
-            <span>${{ cartSummary().total }}</span>
+          <div class="form-field">
+            <input type="email" formControlName="email" class="form-input" placeholder="Email Address*" />
           </div>
         </div>
       </div>
 
+      <!-- Shipping Information -->
+      <div class="form-section">
+        <h3 class="section-title">Shipping Information</h3>
+        <div class="form-field">
+          <input type="text" formControlName="address" class="form-input" placeholder="Address*" />
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <input type="text" formControlName="city" class="form-input" placeholder="City*" />
+          </div>
+          <div class="form-field">
+            <input type="text" formControlName="postalCode" class="form-input" placeholder="Postal Code*" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="form-section">
+        <h3 class="section-title">Payment</h3>
+        @if (elementsOptions().clientSecret) {
+          <ngx-stripe-payment [elementsOptions]="elementsOptions()" />
+        } @else {
+          <p class="loading-payment">Loading payment form...</p>
+        }
+      </div>
+
+      <button type="submit" class="btn-pay" [disabled]="isLoading() || checkoutForm.invalid">
+        {{ isLoading() ? 'Processing...' : 'Purchase' }}
+      </button>
+
+    </form>
+
+    <!-- Right: order summary -->
+    <div class="checkout-summary">
+      <h3 class="section-title">Your Order</h3>
+
+      <!-- Items list -->
+      <div class="checkout-items">
+        @for (item of cartItems(); track item.id) {
+          <div class="checkout-item">
+            <div class="checkout-item-image-wrapper">
+              <img [src]="item.image" [alt]="item.name" class="checkout-item-image" />
+            </div>
+            <div class="checkout-item-info">
+              <p class="checkout-item-name">{{ item.name }}</p>
+              <p class="checkout-item-qty">Qty: {{ item.quantity }}</p>
+            </div>
+            <span class="checkout-item-price">${{ item.price * item.quantity }}</span>
+          </div>
+        }
+      </div>
+
+      <hr class="summary-divider" />
+
+      <!-- Totals -->
+      <div class="summary-rows">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>${{ cartSummary().subtotal }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (13%)</span>
+          <span>${{ cartSummary().vatAmount }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span>Free</span>
+        </div>
+        <hr class="summary-divider" />
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span>${{ cartSummary().total }}</span>
+        </div>
+      </div>
     </div>
-  }
+
+  </div>
 </div>

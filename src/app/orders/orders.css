@@ -1,0 +1,164 @@
+.orders-container {
+  font-family: 'Nunito', sans-serif;
+  background-color: #fdfcf8;
+  min-height: 100vh;
+  padding: 12rem 6rem 0rem 6rem;
+}
+
+.orders-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem 0;
+  font-family: 'Nunito', sans-serif;
+  color: #aaa;
+}
+
+.auth-message {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.btn-shop {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #333;
+  background-color: #f0ead8;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-shop:hover {
+  transform: scale(1.02);
+}
+
+.view-auth-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #333;
+  background-color: #f0ead8;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.view-auth-btn:hover {
+  transform: scale(1.02);
+}
+
+/* Each order is its own card */
+.order-card {
+  border: 1px solid #333;
+  border-radius: 12px;
+  background-color: #fdfcf8;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0ddd5;
+}
+
+.order-date {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.order-total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Column headers inside each order card */
+.order-table-header {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  padding: 0.5rem 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #333;
+  border-bottom: 1px solid #e0ddd5;
+  margin-bottom: 0.5rem;
+}
+
+/* Each product row */
+.order-item {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0ede6;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.order-item-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order-item-image-wrapper {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0ddd5;
+}
+
+.order-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.order-item-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.order-item-description {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 0;
+}
+
+.order-item-quantity,
+.order-item-price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.col-center {
+  text-align: center;
+}

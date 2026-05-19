@@ -9,7 +9,7 @@
 
       <!-- Left arrow -->
       <div class="nav-col">
-        @if (hasPrevious) {
+        @if (hasPrevious()) {
           <button class="nav-btn" (click)="navigate('prev')">
             <mat-icon>arrow_back</mat-icon>
           </button>
@@ -22,20 +22,20 @@
         <!-- left column -->
         <div class="product-left">
           <div class="product-main-image-wrapper">
-            <img [src]="product()?.imageUrl" [alt]="product()?.name" class="product-main-image" />
+            <img [src]="product()!.imageUrl" [alt]="product()!.name" class="product-main-image" />
           </div>
         </div>
 
         <!-- right column -->
         <div class="product-right">
           <div class="product-header">
-            <h1 class="product-name">{{ product()?.name }}</h1>
-            <span class="product-price">${{ product()?.price }}</span>
+            <h1 class="product-name">{{ product()!.name }}</h1>
+            <span class="product-price">${{ product()!.price }}</span>
           </div>
 
           <div class="product-section">
             <h2 class="product-section-title">Description</h2>
-            <p class="product-description">{{ product()?.description }}</p>
+            <p class="product-description">{{ product()!.description }}</p>
           </div>
 
           <div class="product-section">
@@ -78,7 +78,7 @@
 
       <!-- Right arrow -->
       <div class="nav-col">
-        @if (hasNext) {
+        @if (hasNext()) {
           <button class="nav-btn" (click)="navigate('next')">
             <mat-icon>arrow_forward</mat-icon>
           </button>
@@ -88,26 +88,26 @@
     </div>
   }
 
-  @if (showCartNotification) {
+  @if (showCartNotification()) {
     <app-cart-notification
-      [productName]="product()?.name ?? ''"
+      [productName]="product()!.name"
       [quantity]="quantity"
-      (close)="showCartNotification = false"
+      (close)="showCartNotification.set(false)"
       (viewCart)="goToCart()"
     />
   }
 
-  @if (showFavouriteNotification) {
+  @if (showFavouriteNotification()) {
     <app-favourite-notification
-      [productName]="product()?.name ?? ''"
-      (close)="showFavouriteNotification = false"
+      [productName]="product()!.name"
+      (close)="showFavouriteNotification.set(false)"
       (viewFavourites)="goToFavourites()"
     />
   }
 
-  @if (showAuthNotification) {
+  @if (showAuthNotification()) {
     <app-auth-notification
-      (close)="showAuthNotification = false"
+      (close)="showAuthNotification.set(false)"
       (viewAuth)="goToLogin()"
     />
   }

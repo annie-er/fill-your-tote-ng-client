@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './drawing-detail.css'
 })
 export class DrawingDetail {
-  identifier = input.required<string>();
+  identifier = input.required<string>(); // gets set from the router parameter (not the parent)
   private drawingsService = inject(DrawingsService);
   private router = inject(Router);
 
@@ -26,13 +26,8 @@ export class DrawingDetail {
     this.allDrawings().findIndex(d => d.id === this.drawing()?.id)
   );
 
-  get hasPrevious(): boolean {
-    return this.currentIndex() > 0;
-  }
-
-  get hasNext(): boolean {
-    return this.currentIndex() < this.allDrawings().length - 1;
-  }
+  hasPrevious = computed(() => this.currentIndex() > 0);
+  hasNext = computed(() => this.currentIndex() < this.allDrawings().length - 1);
 
   navigate(direction: 'prev' | 'next') {
     const newIndex = direction === 'prev'

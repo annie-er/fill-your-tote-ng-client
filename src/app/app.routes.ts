@@ -3,9 +3,7 @@ import { Home } from './home/home';
 import { Drawings } from './drawings/drawings';
 import { Shop } from './shop/shop';
 import { Cart } from './cart/cart';
-import { authGuard } from './core/guards/auth.guard';
 import { noAuthGuard } from './core/guards/no-auth.guard';
-import { Checkout } from './checkout/checkout';
 
 export const routes: Routes = [
     // eagerly loaded routes
@@ -58,10 +56,17 @@ export const routes: Routes = [
     },
     { 
         path: 'checkout', 
-        component: Checkout 
+        loadComponent: () => import('./checkout/checkout')
+            .then(m => m.Checkout)
     },
-    // { 
-    //     path: 'checkout/success', 
-    //     component: CheckoutSuccess 
-    // },
+    { 
+        path: 'checkout/success', 
+        loadComponent: () => import('./checkout/checkout-success/checkout-success')
+            .then(m => m.CheckoutSuccess)
+    },
+    {
+        path: 'orders',
+        loadComponent: () => import('./orders/orders')
+            .then(m => m.Orders)
+    },
 ];

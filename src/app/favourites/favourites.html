@@ -49,11 +49,11 @@
       }
     }
 
-    @if (showNotification) {
+    @if (showNotification()) {
       <app-cart-notification
-        [productName]="notificationProduct"
+        [productName]="notificationProduct()"
         [quantity]="1"
-        (close)="showNotification = false"
+        (close)="showNotification.set(false)"
         (viewCart)="goToCart()"
       />
     }
