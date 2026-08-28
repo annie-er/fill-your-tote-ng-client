@@ -37,10 +37,10 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
-environments/*.ts
-nginx.conf
+environments/environment.development.ts
+!nginx.conf
 public/
-.github/workflows
+!.github/workflows
 src/environments/*.ts
 
 # System files
