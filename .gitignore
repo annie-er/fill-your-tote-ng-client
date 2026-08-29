@@ -38,7 +38,7 @@ testem.log
 /typings
 __screenshots__/
 !nginx.conf
-public/
+!public/
 !.github/workflows
 src/environments/*.ts
 !src/environments/environment.ts
