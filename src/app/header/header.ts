@@ -14,7 +14,7 @@ export class Header {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  favouritesHover = false; // leave as plain properties as they're only ever set in the template, not in the typescript code
+  favouritesHover = false; // leave as plain properties as they're only ever set in the template, not in the ts code
   cartHover = false;
   accountHover = false;
   showAccountPanel = signal(false);
